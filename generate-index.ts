@@ -83,6 +83,7 @@ function getCommitsForFile(filename: string, callback: (result: Commit[]) => voi
     proc.exec('git ' + args.join(' '), { cwd: dtRoot }, (err, stdout) => {
         if (err) throw err;
         var x = stdout.toString('UTF-8');
+        x = x.replace(/\\/g, '/');
         x = x.replace(/\"/g, '\\\"');
         x = x.replace(new RegExp(fakeQuote, 'g'), '"');
         x = x.replace(new RegExp(eol, 'g'), ',');
